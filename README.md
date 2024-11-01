@@ -40,7 +40,7 @@ $client = ClientBuilder::create()
 	->setClientKey('YOUR_CLIENT_KEY')
 	->setClientSecret('YOUR_CLIENT_SECRET')
 	->setUserAgent('YOUR_USER_AGENT')
-	->build();
+	->build('STORE_FRONT');
 ```
 
 ### Namespaces overview

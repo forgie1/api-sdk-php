@@ -8,6 +8,7 @@ use Hitmeister\Component\Api\Transfers\AbstractTransfer;
 
 class Cursor implements \Iterator
 {
+
 	/** @var AbstractEndpoint */
 	private $endpoint;
 
@@ -71,6 +72,15 @@ class Cursor implements \Iterator
 		}
 	}
 
+	public function __toArray(): array
+	{
+		$array = [];
+		foreach ($this as $key => $value) {
+			$array[$key] = $value;
+		}
+		return $array;
+	}
+
 	/**
 	 * @return AbstractEndpoint
 	 */
@@ -82,7 +92,7 @@ class Cursor implements \Iterator
 	/**
 	 * {@inheritdoc}
 	 */
-	public function current()
+	public function current(): mixed
 	{
 		return $this->getCurrent();
 	}
@@ -90,7 +100,7 @@ class Cursor implements \Iterator
 	/**
 	 * {@inheritdoc}
 	 */
-	public function next()
+	public function next(): void
 	{
 		++$this->position;
 	}
@@ -98,7 +108,7 @@ class Cursor implements \Iterator
 	/**
 	 * {@inheritdoc}
 	 */
-	public function key()
+	public function key(): int
 	{
 		return $this->position;
 	}
@@ -106,7 +116,7 @@ class Cursor implements \Iterator
 	/**
 	 * {@inheritdoc}
 	 */
-	public function valid()
+	public function valid(): bool
 	{
 		if (!isset($this->rawData[$this->position])) {
 			$this->fetchData();
@@ -117,7 +127,7 @@ class Cursor implements \Iterator
 	/**
 	 * {@inheritdoc}
 	 */
-	public function rewind()
+	public function rewind(): void
 	{
 		$this->position = 0;
 	}
@@ -174,7 +184,7 @@ class Cursor implements \Iterator
 			$this->apiOffset += $this->apiLimit;
 		}
 
-		$this->rawData = array_merge($this->rawData, $resultRequest['json']);
+		$this->rawData = array_merge($this->rawData, $resultRequest['json']['data']);
 	}
 
 	/**
@@ -189,8 +199,7 @@ class Cursor implements \Iterator
 
 		// Check raw data next, build transfer
 		if (isset($this->rawData[$this->position])) {
-			$this->transferData[$this->position] =
-				AbstractTransfer::makeTransfer($this->transferClass, $this->rawData[$this->position]);
+			$this->transferData[$this->position] = AbstractTransfer::makeTransfer($this->transferClass, $this->rawData[$this->position]);
 			return $this->transferData[$this->position];
 		}
 
@@ -207,4 +216,5 @@ class Cursor implements \Iterator
 		}
 		return (int)$this->total;
 	}
+
 }

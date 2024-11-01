@@ -34,18 +34,23 @@ class Response
 	 */
 	public static function extractCursorPosition(array &$data)
 	{
-		if (!isset($data['headers']['Hm-Collection-Range'][0])) {
-			throw new ServerException('Response header "Hm-Collection-Range" is missing.');
+		if (!isset($data['json']['pagination'])) {
+			throw new ServerException('Response "pagination" is missing.');
 		}
-		$matches = [];
-		if (!preg_match('/(\d+)-(\d+)\/(\d+)/', $data['headers']['Hm-Collection-Range'][0], $matches)) {
-			throw new ServerException('Response header "Hm-Collection-Range" has wrong format.');
+		if (!isset($data['json']['pagination']['offset'])) {
+			throw new ServerException('Response "pagination->offset" is missing.');
+		}
+		if (!isset($data['json']['pagination']['limit'])) {
+			throw new ServerException('Response "pagination->limit" is missing.');
+		}
+		if (!isset($data['json']['pagination']['total'])) {
+			throw new ServerException('Response "pagination->total" is missing.');
 		}
 
 		return [
-			'start' => (int)$matches[1],
-			'end' => (int)$matches[2],
-			'total' => (int)$matches[3],
+			'start' => (int)$data['json']['pagination']['offset'],
+			'end' => (int)($data['json']['pagination']['offset'] + $data['json']['pagination']['limit']),
+			'total' => (int)$data['json']['pagination']['total'],
 		];
 	}
 

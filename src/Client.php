@@ -110,34 +110,35 @@ class Client
 
 	/**
 	 * @param Transport $transport
+	 * @param ?string $storefront
 	 */
-	public function __construct(Transport $transport)
+	public function __construct(Transport $transport, string $storefront = null)
 	{
 		$this->transport = $transport;
 
 		// Namespaces
-		$this->attributesNs = new AttributesNamespace($this->transport);
-		$this->categoriesNs = new CategoriesNamespace($this->transport);
+		$this->attributesNs = new AttributesNamespace($this->transport, $storefront);
+		$this->categoriesNs = new CategoriesNamespace($this->transport, $storefront);
 		$this->claimMessagesNs = new ClaimMessagesNamespace($this->transport);
-		$this->claimsNs = new ClaimsNamespace($this->transport);
-		$this->importFilesNs = new ImportFilesNamespace($this->transport);
-		$this->itemsNs = new ItemsNamespace($this->transport);
-		$this->ordersNs = new OrdersNamespace($this->transport);
-		$this->orderInvoicesNs = new OrderInvoicesNamespace($this->transport);
-		$this->orderUnitsNs = new OrderUnitsNamespace($this->transport);
-		$this->productDataNs = new ProductDataNamespace($this->transport);
-		$this->productDataStatusNs = new ProductDataStatusNamespace($this->transport);
-		$this->reportsNs = new ReportsNamespace($this->transport);
-		$this->returnsNs = new ReturnsNamespace($this->transport);
-		$this->returnUnitsNs = new ReturnUnitsNamespace($this->transport);
-		$this->shipmentsNs = new ShipmentsNamespace($this->transport);
-		$this->shippingGroupsNs = new ShippingGroupsNamespace($this->transport);
-		$this->statusNs = new StatusNamespace($this->transport);
-		$this->subscriptionsNs = new SubscriptionsNamespace($this->transport);
-		$this->ticketMessagesNs = new TicketMessagesNamespace($this->transport);
-		$this->ticketsNs = new TicketsNamespace($this->transport);
-		$this->warehousesNs = new WarehousesNamespace($this->transport);
-		$this->unitsNs = new UnitsNamespace($this->transport);
+		$this->claimsNs = new ClaimsNamespace($this->transport, $storefront);
+		$this->importFilesNs = new ImportFilesNamespace($this->transport, $storefront);
+		$this->itemsNs = new ItemsNamespace($this->transport, $storefront);
+		$this->ordersNs = new OrdersNamespace($this->transport, $storefront);
+		$this->orderInvoicesNs = new OrderInvoicesNamespace($this->transport, $storefront);
+		$this->orderUnitsNs = new OrderUnitsNamespace($this->transport, $storefront);
+		$this->productDataNs = new ProductDataNamespace($this->transport, $storefront);
+		$this->productDataStatusNs = new ProductDataStatusNamespace($this->transport, $storefront);
+		$this->reportsNs = new ReportsNamespace($this->transport, $storefront);
+		$this->returnsNs = new ReturnsNamespace($this->transport, $storefront);
+		$this->returnUnitsNs = new ReturnUnitsNamespace($this->transport, $storefront);
+		$this->shipmentsNs = new ShipmentsNamespace($this->transport, $storefront);
+		$this->shippingGroupsNs = new ShippingGroupsNamespace($this->transport, $storefront);
+		$this->statusNs = new StatusNamespace($this->transport, $storefront);
+		$this->subscriptionsNs = new SubscriptionsNamespace($this->transport, $storefront);
+		$this->ticketMessagesNs = new TicketMessagesNamespace($this->transport, $storefront);
+		$this->ticketsNs = new TicketsNamespace($this->transport, $storefront);
+		$this->warehousesNs = new WarehousesNamespace($this->transport, $storefront);
+		$this->unitsNs = new UnitsNamespace($this->transport, $storefront);
 	}
 
 	/**

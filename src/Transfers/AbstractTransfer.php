@@ -8,6 +8,7 @@ use Hitmeister\Component\Api\Exceptions\UnexpectedPropertyException;
 
 abstract class AbstractTransfer implements \JsonSerializable
 {
+
 	/** @var array */
 	private $data = [];
 
@@ -147,7 +148,7 @@ abstract class AbstractTransfer implements \JsonSerializable
 	/**
 	 * @return string
 	 */
-	public function jsonSerialize()
+	public function jsonSerialize(): mixed
 	{
 		return $this->toArray();
 	}

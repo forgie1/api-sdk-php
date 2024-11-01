@@ -51,7 +51,9 @@ class CategoriesNamespace extends AbstractNamespace
 	public function buildFind()
 	{
 		$endpoint = new Find($this->getTransport());
-		return new FindBuilder($endpoint, '\Hitmeister\Component\Api\Transfers\CategoryTransfer');
+		$findBuilder = new FindBuilder($endpoint, '\Hitmeister\Component\Api\Transfers\CategoryTransfer');
+		$findBuilder->addParam('storefront', $this->storefront);
+		return $findBuilder;
 	}
 
 	/**
@@ -100,4 +102,5 @@ class CategoriesNamespace extends AbstractNamespace
 		$result = $this->performWithId($endpoint, $id);
 		return $result ? CategoryWithEmbeddedTransfer::make($result) : null;
 	}
+
 }

@@ -138,9 +138,10 @@ class ClientBuilder
 	}
 
 	/**
+	 * @param string $storefront
 	 * @return Client
 	 */
-	public function build()
+	public function build(string $storefront)
 	{
 		$this->validate();
 
@@ -156,7 +157,7 @@ class ClientBuilder
 		if (null === $this->transport)
 			$this->transport = new Transport($this->handler, new RequestBuilder($this->baseUrl, $this->userAgent));
 
-		return new Client($this->transport);
+		return new Client($this->transport, $storefront);
 	}
 
 	/**

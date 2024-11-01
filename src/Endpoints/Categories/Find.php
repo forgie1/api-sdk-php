@@ -14,7 +14,7 @@ class Find extends AbstractEndpoint
 	 */
 	public function getParamWhiteList()
 	{
-		return ['q', 'id_parent', 'limit', 'offset'];
+		return ['storefront', 'q', 'id_parent', 'limit', 'offset'];
 	}
 
 	/**
