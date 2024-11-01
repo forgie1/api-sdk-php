@@ -2,7 +2,10 @@
 
 namespace Hitmeister\Component\Api\Namespaces;
 
+use Hitmeister\Component\Api\Cursor;
+use Hitmeister\Component\Api\Endpoints\Attributes\Find;
 use Hitmeister\Component\Api\Endpoints\Attributes\Get;
+use Hitmeister\Component\Api\FindBuilder;
 use Hitmeister\Component\Api\Namespaces\Traits\PerformWithId;
 use Hitmeister\Component\Api\Transfers\AttributeTransfer;
 
@@ -29,4 +32,30 @@ class AttributesNamespace extends AbstractNamespace
 		$result = $this->performWithId($endpoint, $id);
 		return $result ? AttributeTransfer::make($result) : null;
 	}
+
+	/**
+	 * @param ?string $q
+	 * @param ?int    $limit
+	 * @param ?int    $offset
+	 * @param ?string $locale
+	 * @return Cursor|AttributeTransfer[]
+	 */
+	public function find($q = null, $limit = null, $offset = null, string $locale = null)
+	{
+		return $this->buildFind()
+			->addParam('q', $q)
+			->setLimit($limit)
+			->setOffset($offset)
+			->addParam('locale', $locale)
+			->find();
+	}
+
+	public function buildFind()
+	{
+		$endpoint = new Find($this->getTransport());
+		$builder = new FindBuilder($endpoint, AttributeTransfer::class);
+		$builder->addParam('storefront', $this->storefront);
+		return $builder;
+	}
+
 }
