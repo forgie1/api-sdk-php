@@ -28,16 +28,15 @@
         "issues": "https://github.com/hitmeister/api-sdk-php/issues"
     },
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=8.3.0",
         "ext-curl": "*",
         "ext-json": "*",
-        "guzzlehttp/ringphp": "^1.1",
+        "ezimuel/ringphp": "^1.2.2",
         "psr/log": "^1.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
         "phpunit/phpunit": "^4.8",
-        "php-coveralls/php-coveralls": "^1.1",
         "memio/memio": "^1.1"
     },
     "suggest": {
