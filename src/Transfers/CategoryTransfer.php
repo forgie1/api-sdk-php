@@ -90,6 +90,12 @@ class CategoryTransfer extends AbstractTransfer
     'embedded' => false,
     'is_multiple' => false,
   ),
+  'children' =>
+  array (
+    'embedded' => false,
+    'is_multiple' => true,
+	'type' => CategoryTransfer::class,
+  ),
 );
         return $properties;
     }

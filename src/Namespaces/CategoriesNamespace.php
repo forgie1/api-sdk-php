@@ -6,6 +6,7 @@ use Hitmeister\Component\Api\Cursor;
 use Hitmeister\Component\Api\Endpoints\Categories\Decide;
 use Hitmeister\Component\Api\Endpoints\Categories\Find;
 use Hitmeister\Component\Api\Endpoints\Categories\Get;
+use Hitmeister\Component\Api\Endpoints\Categories\Tree;
 use Hitmeister\Component\Api\Exceptions\InvalidArgumentException;
 use Hitmeister\Component\Api\Exceptions\ResourceNotFoundException;
 use Hitmeister\Component\Api\FindBuilder;
@@ -27,6 +28,19 @@ use Hitmeister\Component\Api\Transfers\CategoryWithEmbeddedTransfer;
 class CategoriesNamespace extends AbstractNamespace
 {
 	use PerformWithId;
+
+	public function tree(?string $locale = null): ?CategoryTransfer
+	{
+		$endpoint = new Tree($this->getTransport());
+		$params = ['storefront' => $this->storefront];
+		if ($locale) {
+			$params['locale'] = $locale;
+		}
+		$endpoint->setParams($params);
+		$result = $endpoint->performRequest();
+
+		return $result ? CategoryTransfer::make($result['json']['data']) : null;
+	}
 
 	/**
 	 * @param string $q
@@ -100,7 +114,7 @@ class CategoriesNamespace extends AbstractNamespace
 		}
 
 		$result = $this->performWithId($endpoint, $id);
-		return $result ? CategoryWithEmbeddedTransfer::make($result) : null;
+		return $result ? CategoryWithEmbeddedTransfer::make($result['json']['data']) : null;
 	}
 
 }
