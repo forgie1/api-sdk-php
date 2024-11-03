@@ -19,6 +19,7 @@ namespace Hitmeister\Component\Api\Transfers;
  * @property int $fixed_fee
  * @property float $vat
  * @property int $real_main_category_id
+ * @property CategoryTransfer[] $children
  *
  *
  */
