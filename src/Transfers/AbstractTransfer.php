@@ -26,6 +26,9 @@ abstract class AbstractTransfer implements \JsonSerializable
 		$this->validateProperty($name);
 
 		if (!array_key_exists($name, $this->data)) {
+			if ($this->isMulti($name)) {
+				return [];
+			}
 			if ($this->isEmbedded($name)) {
 				throw new EmptyEmbeddedPropertyException(sprintf('Embedded property "%s" is empty.', $name));
 			}
