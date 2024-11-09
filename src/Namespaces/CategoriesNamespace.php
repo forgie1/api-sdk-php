@@ -105,16 +105,17 @@ class CategoriesNamespace extends AbstractNamespace
 	public function get($id, array $embedded = [])
 	{
 		$endpoint = new Get($this->getTransport());
+		$params['storefront'] = $this->storefront;
 
 		// Ask for embedded fields
 		if (!empty($embedded)) {
-			$endpoint->setParams([
-				'embedded' => $embedded,
-			]);
+			$params['embedded'] = $embedded;
 		}
 
+		$endpoint->setParams($params);
+
 		$result = $this->performWithId($endpoint, $id);
-		return $result ? CategoryWithEmbeddedTransfer::make($result['json']['data']) : null;
+		return $result ? CategoryWithEmbeddedTransfer::make($result['data']) : null;
 	}
 
 }

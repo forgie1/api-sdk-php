@@ -26,8 +26,17 @@ class Get extends AbstractEndpoint implements IdAware
 	/**
 	 * {@inheritdoc}
 	 */
+	public function getParamWhiteList()
+	{
+		return ['storefront', 'locale'];
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function getUriPattern()
 	{
 		return 'categories/%d/';
 	}
+
 }
