@@ -89,7 +89,7 @@ class Middleware
 						if ($response['status'] >= 400 && $response['status'] < 500) {
 							$message = isset($response['json']['message']) ? $response['json']['message'] : 'Unknown error';
 							if (404 == $response['status']) {
-								$exception = new ResourceNotFoundException();
+								$exception = new ResourceNotFoundException($message);
 							} else {
 								$exception = new BadRequestException($message, $response['status']);
 							}
