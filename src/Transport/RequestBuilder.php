@@ -93,6 +93,8 @@ class RequestBuilder
 			'scheme' => $this->schema,
 			'uri' => $this->uri . $uri,
 			'headers' => [
+				'Accept' => ['application/json'],
+				'Content-Type' => ['application/json'],
 				'Host' => [$this->host],
 				'User-Agent' => [$this->getUserAgent()],
 			],
