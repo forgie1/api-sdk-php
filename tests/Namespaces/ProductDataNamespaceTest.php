@@ -61,7 +61,7 @@ class ProductDataNamespaceTest extends TransportAwareTestCase
 			]);
 
 		$namespace = new ProductDataNamespace($this->transport);
-		$result = $namespace->upsert("1231231231232", ProductDataTransfer::make([
+		$result = $namespace->create("1231231231232", ProductDataTransfer::make([
 			'category' => ['alpin-skier'],
 		]));
 		$this->assertTrue($result);

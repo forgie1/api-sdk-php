@@ -20,11 +20,6 @@ class AdditionalAttributeTransfer extends AbstractTransfer
     public function getProperties()
     {
         static $properties = array (
-  'attribute' => 
-  array (
-    'embedded' => false,
-    'is_multiple' => false,
-  ),
   'value' => 
   array (
     'embedded' => false,
@@ -43,4 +38,10 @@ class AdditionalAttributeTransfer extends AbstractTransfer
     {
         return AbstractTransfer::makeTransfer('Hitmeister\Component\Api\Transfers\AdditionalAttributeTransfer', $data);
     }
+
+	public function toArray(): string|array
+	{
+		return $this->value;
+	}
+
 }

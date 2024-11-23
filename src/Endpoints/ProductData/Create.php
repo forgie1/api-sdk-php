@@ -20,12 +20,15 @@ use Hitmeister\Component\Api\Transfers\ProductDataTransfer;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     https://www.kaufland.de/api/v1/
  */
-class Upsert extends AbstractEndpoint implements IdAware
+class Create extends AbstractEndpoint
 {
 	use RequestPut;
-	use UriPatternId;
-	use EmptyParamWhiteList;
 	use BodyTransfer;
+
+	public function getParamWhiteList()
+	{
+		return ['locale'];
+	}
 
 	/**
 	 * @param ProductDataTransfer $transfer
@@ -38,8 +41,8 @@ class Upsert extends AbstractEndpoint implements IdAware
 	/**
 	 * {@inheritdoc}
 	 */
-	protected function getUriPattern()
+	public function getUri()
 	{
-		return 'product-data/%s/';
+		return 'product-data';
 	}
 }

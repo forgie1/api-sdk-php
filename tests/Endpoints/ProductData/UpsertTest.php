@@ -3,7 +3,7 @@
 namespace Hitmeister\Component\Api\Tests\Endpoints\ProductData;
 
 use Hitmeister\Component\Api\Endpoints\ProductData\Put;
-use Hitmeister\Component\Api\Endpoints\ProductData\Upsert;
+use Hitmeister\Component\Api\Endpoints\ProductData\Create;
 use Hitmeister\Component\Api\Tests\TransportAwareTestCase;
 
 /**
@@ -28,7 +28,7 @@ class UpsertTest extends TransportAwareTestCase
 		$transfer = \Mockery::mock('\Hitmeister\Component\Api\Transfers\ProductDataTransfer');
 		$transfer->shouldReceive('toArray')->once()->andReturn(['condition' => 'new']);
 
-		$update = new Upsert($this->transport);
+		$update = new Create($this->transport);
 		$update->setId($ean);
 		$update->setTransfer($transfer);
 
@@ -48,7 +48,7 @@ class UpsertTest extends TransportAwareTestCase
 	 */
 	public function testExceptionOnEmptyId()
 	{
-		$update = new Upsert($this->transport);
+		$update = new Create($this->transport);
 		$update->getURI();
 	}
 

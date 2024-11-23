@@ -4,7 +4,7 @@ namespace Hitmeister\Component\Api\Namespaces;
 
 use Hitmeister\Component\Api\Endpoints\ProductData\Delete;
 use Hitmeister\Component\Api\Endpoints\ProductData\Get;
-use Hitmeister\Component\Api\Endpoints\ProductData\Upsert;
+use Hitmeister\Component\Api\Endpoints\ProductData\Create;
 use Hitmeister\Component\Api\Endpoints\ProductData\Update;
 use Hitmeister\Component\Api\Exceptions\ResourceNotFoundException;
 use Hitmeister\Component\Api\Namespaces\Traits\PerformWithId;
@@ -37,16 +37,16 @@ class ProductDataNamespace extends AbstractNamespace
 	}
 
 	/**
-	 * @param string              $ean
+	 * @param string              $locale
 	 * @param ProductDataTransfer $data
 	 *
 	 * @return string
 	 * @throws \Hitmeister\Component\Api\Exceptions\ServerException
 	 */
-	public function upsert($ean, ProductDataTransfer $data)
+	public function create($locale, ProductDataTransfer $data)
 	{
-		$endpoint = new Upsert($this->getTransport());
-		$endpoint->setId($ean);
+		$endpoint = new Create($this->getTransport());
+		$endpoint->setParams(['locale' => $locale]);
 		$endpoint->setTransfer($data);
 
 		$resultRequest = $endpoint->performRequest();

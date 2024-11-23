@@ -33,47 +33,7 @@ class ProductDataTransfer extends AbstractTransfer
     'embedded' => false,
     'is_multiple' => true,
   ),
-  'title' => 
-  array (
-    'embedded' => false,
-    'is_multiple' => true,
-  ),
-  'category' => 
-  array (
-    'embedded' => false,
-    'is_multiple' => true,
-  ),
-  'additional_categories' => 
-  array (
-    'embedded' => false,
-    'is_multiple' => true,
-  ),
-  'description' => 
-  array (
-    'embedded' => false,
-    'is_multiple' => true,
-  ),
-  'short_description' => 
-  array (
-    'embedded' => false,
-    'is_multiple' => true,
-  ),
-  'mpn' => 
-  array (
-    'embedded' => false,
-    'is_multiple' => true,
-  ),
-  'list_price' => 
-  array (
-    'embedded' => false,
-    'is_multiple' => true,
-  ),
-  'picture' => 
-  array (
-    'embedded' => false,
-    'is_multiple' => true,
-  ),
-  'additional_attributes' => 
+  'attributes' =>
   array (
     'embedded' => false,
     'is_multiple' => true,
@@ -83,7 +43,16 @@ class ProductDataTransfer extends AbstractTransfer
         return $properties;
     }
 
-    /**
+	public function __set($name, $value)
+	{
+		if ($name === 'ean') {
+			parent::__set($name, $value);
+		} else {
+			$this->addAttribute($name, AdditionalAttributeTransfer::makeTransfer(AdditionalAttributeTransfer::class, ['value' => $value]));
+		}
+	}
+
+	/**
      * @param array $data
      *
      * @return ProductDataTransfer

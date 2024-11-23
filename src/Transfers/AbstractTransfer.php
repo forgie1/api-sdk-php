@@ -17,6 +17,11 @@ abstract class AbstractTransfer implements \JsonSerializable
 	 */
 	abstract public function getProperties();
 
+	public function addAttribute(string $name, AdditionalAttributeTransfer $attribute)
+	{
+		$this->data['attributes'][$name] = $attribute;
+	}
+
 	/**
 	 * @param string $name
 	 * @return mixed
