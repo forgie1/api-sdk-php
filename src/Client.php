@@ -7,6 +7,7 @@ use Hitmeister\Component\Api\Namespaces\CategoriesNamespace;
 use Hitmeister\Component\Api\Namespaces\ClaimMessagesNamespace;
 use Hitmeister\Component\Api\Namespaces\ClaimsNamespace;
 use Hitmeister\Component\Api\Namespaces\ImportFilesNamespace;
+use Hitmeister\Component\Api\Namespaces\InfoNamespace;
 use Hitmeister\Component\Api\Namespaces\ItemsNamespace;
 use Hitmeister\Component\Api\Namespaces\OrdersNamespace;
 use Hitmeister\Component\Api\Namespaces\OrderInvoicesNamespace;
@@ -93,6 +94,9 @@ class Client
 	/** @var StatusNamespace */
 	private $statusNs;
 
+	/** @var InfoNamespace */
+	private $infoNs;
+
 	/** @var SubscriptionsNamespace */
 	private $subscriptionsNs;
 
@@ -134,6 +138,7 @@ class Client
 		$this->shipmentsNs = new ShipmentsNamespace($this->transport, $storefront);
 		$this->shippingGroupsNs = new ShippingGroupsNamespace($this->transport, $storefront);
 		$this->statusNs = new StatusNamespace($this->transport, $storefront);
+		$this->infoNs = new InfoNamespace($this->transport, $storefront);
 		$this->subscriptionsNs = new SubscriptionsNamespace($this->transport, $storefront);
 		$this->ticketMessagesNs = new TicketMessagesNamespace($this->transport, $storefront);
 		$this->ticketsNs = new TicketsNamespace($this->transport, $storefront);
@@ -283,6 +288,14 @@ class Client
 	public function status()
 	{
 		return $this->statusNs;
+	}
+
+	/**
+	 * @return InfoNamespace
+	 */
+	public function info()
+	{
+		return $this->infoNs;
 	}
 
 	/**

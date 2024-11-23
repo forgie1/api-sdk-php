@@ -138,10 +138,10 @@ class ClientBuilder
 	}
 
 	/**
-	 * @param string $storefront
+	 * @param ?string $storefront
 	 * @return Client
 	 */
-	public function build(string $storefront)
+	public function build(string $storefront = null)
 	{
 		$this->validate();
 
