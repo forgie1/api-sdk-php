@@ -23,7 +23,7 @@ class Find extends AbstractEndpoint
 	 */
 	public function getParamWhiteList()
 	{
-		return ['limit', 'offset'];
+		return ['limit', 'offset', 'storefront'];
 	}
 
 	/**
@@ -31,6 +31,6 @@ class Find extends AbstractEndpoint
 	 */
 	public function getURI()
 	{
-		return 'shipping-groups/seller/';
+		return 'shipping-groups';
 	}
 }

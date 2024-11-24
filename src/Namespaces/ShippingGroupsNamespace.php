@@ -40,6 +40,8 @@ class ShippingGroupsNamespace extends AbstractNamespace
 	public function buildFind()
 	{
 		$endpoint = new Find($this->getTransport());
-		return new FindBuilder($endpoint, '\Hitmeister\Component\Api\Transfers\ShippingGroupTransfer');
+		$builder = new FindBuilder($endpoint, ShippingGroupTransfer::class);
+		$builder->addParam('storefront', $this->storefront);
+		return $builder;
 	}
 }
