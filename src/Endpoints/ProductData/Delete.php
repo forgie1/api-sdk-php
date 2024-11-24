@@ -23,11 +23,16 @@ class Delete extends AbstractEndpoint implements IdAware
 	use UriPatternId;
 	use EmptyParamWhiteList;
 
+	public function getParamWhiteList()
+	{
+		return ['locale'];
+	}
+
 	/**
 	 * {@inheritdoc}
 	 */
 	protected function getUriPattern()
 	{
-		return 'product-data/%s/';
+		return 'product-data/%s';
 	}
 }

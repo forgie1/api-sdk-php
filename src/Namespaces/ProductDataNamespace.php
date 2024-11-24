@@ -76,14 +76,16 @@ class ProductDataNamespace extends AbstractNamespace
 	}
 
 	/**
+	 * @param string $locale
 	 * @param string $ean
-	 * 
+	 *
 	 * @return bool
 	 */
-	public function delete($ean)
+	public function delete(string $locale, string $ean)
 	{
 		$endpoint = new Delete($this->getTransport());
 		$endpoint->setId($ean);
+		$endpoint->setParams(['locale' => $locale]);
 
 		$result = $endpoint->performRequest();
 
