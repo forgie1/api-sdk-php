@@ -7,15 +7,15 @@ namespace Hitmeister\Component\Api\Transfers;
  *
  * @codeCoverageIgnore
  *
- * @property bool $item_ready
- * @property string $item_not_ready_reason
- * @property int $id_item
- * @property float $item_quality
+ * @property bool $product_ready
+ * @property string $product_not_ready_reason
+ * @property int $id_product
+ * @property float $product_quality
  * @property array $missing_attributes
  * @property array $min_one_missing_attributes
  * @property string $update_status
  * @property string $update_fail_reason
- * @property array $attribute_values
+ * @property array|ProductDataStatusAttributeValueTransfer[] $attribute_values
  *
  *
  */
@@ -27,22 +27,22 @@ class ProductDataStatusTransfer extends AbstractTransfer
     public function getProperties()
     {
         static $properties = array (
-  'item_ready' => 
+  'product_ready' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'item_not_ready_reason' => 
+  'product_not_ready_reason' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'id_item' => 
+  'id_product' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'item_quality' => 
+  'product_quality' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
@@ -84,6 +84,6 @@ class ProductDataStatusTransfer extends AbstractTransfer
      */
     public static function make(array $data)
     {
-        return AbstractTransfer::makeTransfer('Hitmeister\Component\Api\Transfers\ProductDataStatusTransfer', $data);
+        return AbstractTransfer::makeTransfer('Hitmeister\Component\Api\Transfers\ProductDataStatusTransfer', $data['data'] ?? []);
     }
 }
