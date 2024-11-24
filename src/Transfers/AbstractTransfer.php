@@ -110,7 +110,7 @@ abstract class AbstractTransfer implements \JsonSerializable
 				continue;
 			}
 
-			$this->validateMulti($name, $rawValue);
+			$this->validateMulti($name, $rawValue ?? []);
 			$type = $this->getCustomType($name);
 
 			if (null === $type) {
@@ -120,7 +120,7 @@ abstract class AbstractTransfer implements \JsonSerializable
 					$value = is_null($rawValue) ? null : AbstractTransfer::makeTransfer($type, $rawValue);
 				} else {
 					$value = [];
-					foreach ($rawValue as $item) {
+					foreach ($rawValue ?? [] as $item) {
 						$value []= AbstractTransfer::makeTransfer($type, $item);
 					}
 				}
