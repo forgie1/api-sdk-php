@@ -7,10 +7,13 @@ namespace Hitmeister\Component\Api\Transfers;
  *
  * @codeCoverageIgnore
  *
- * @property int $id_attribute
+ * @property int $id
  * @property string $name
  * @property string $title
- * @property boolean $is_multiple_allowed
+ * @property string $explanation
+ * @property boolean $is_multiple
+ * @property string $seller_instructions
+ * @property boolean $is_sharedset
  * @property string $type
  *
  *
@@ -23,7 +26,7 @@ class AttributeTransfer extends AbstractTransfer
     public function getProperties()
     {
         static $properties = array (
-  'id_attribute' => 
+  'id' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
@@ -38,7 +41,22 @@ class AttributeTransfer extends AbstractTransfer
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'is_multiple_allowed' => 
+  'explanation' =>
+  array (
+    'embedded' => false,
+    'is_multiple' => false,
+  ),
+  'is_multiple' =>
+  array (
+    'embedded' => false,
+    'is_multiple' => false,
+  ),
+  'seller_instructions' =>
+  array (
+    'embedded' => false,
+    'is_multiple' => false,
+  ),
+  'is_sharedset' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
