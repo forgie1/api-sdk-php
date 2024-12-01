@@ -29,6 +29,7 @@ class AttributesNamespace extends AbstractNamespace
 	public function get($id)
 	{
 		$endpoint = new Get($this->getTransport());
+		$endpoint->setParams(['storefront' => $this->storefront]);
 		$result = $this->performWithId($endpoint, $id);
 		return $result ? AttributeTransfer::make($result) : null;
 	}

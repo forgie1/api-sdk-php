@@ -77,6 +77,6 @@ class AttributeTransfer extends AbstractTransfer
      */
     public static function make(array $data)
     {
-        return AbstractTransfer::makeTransfer('Hitmeister\Component\Api\Transfers\AttributeTransfer', $data);
+        return AbstractTransfer::makeTransfer('Hitmeister\Component\Api\Transfers\AttributeTransfer', $data['data']);
     }
 }
