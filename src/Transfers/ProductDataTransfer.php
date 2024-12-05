@@ -52,6 +52,15 @@ class ProductDataTransfer extends AbstractTransfer
 		}
 	}
 
+	public function __get($name)
+	{
+		if ($name === 'ean') {
+			return parent::__get($name);
+		} else {
+			return $this->getAttribute($name);
+		}
+	}
+
 	/**
      * @param array $data
      *
