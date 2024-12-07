@@ -16,6 +16,8 @@ class TransportException extends \Exception implements ApiException
     /** @var  string */
     protected $requestId = '';
 
+	protected $errors = [];
+
     /**
      * @return string
      */
@@ -31,4 +33,23 @@ class TransportException extends \Exception implements ApiException
     {
         $this->requestId = $requestId;
     }
+
+	/**
+	 * @return array
+	 */
+	public function getErrors(): array
+	{
+		return $this->errors;
+	}
+
+	/**
+	 * @param string $errors
+	 * @return $this
+	 */
+	public function setErrors(array $errors)
+	{
+		$this->errors =$errors;
+		return $this;
+	}
+
 }

@@ -92,6 +92,9 @@ class Middleware
 								$exception = new ResourceNotFoundException($message);
 							} else {
 								$exception = new BadRequestException($message, $response['status']);
+								if (isset($response['json']['errors'])) {
+									$exception->setErrors($response['json']['errors']);
+								}
 							}
 						} else {
 							$message = isset($response['json']['message']) ? $response['json']['message'] : 'Internal Server Error';

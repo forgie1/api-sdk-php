@@ -2,6 +2,7 @@
 
 namespace Hitmeister\Component\Api\Helper;
 
+use Hitmeister\Component\Api\Exceptions\TransportException;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
@@ -42,6 +43,10 @@ class Logger
 		];
 
 		static::log($logger, $message, $context, $level);
+
+		if ($exception instanceof TransportException && $exception->getErrors()) {
+			static::log($logger, 'Errors', $exception->getErrors(), LogLevel::DEBUG);
+		}
 
 		if (isset($response['body'])) {
 			static::log($logger, 'Response body', (array)$response['body'], LogLevel::DEBUG);
