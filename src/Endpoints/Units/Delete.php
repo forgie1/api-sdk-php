@@ -21,13 +21,17 @@ class Delete extends AbstractEndpoint implements IdAware
 {
 	use RequestDelete;
 	use UriPatternId;
-	use EmptyParamWhiteList;
+
+	public function getParamWhiteList()
+	{
+		return ['storefront'];
+	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	protected function getUriPattern()
 	{
-		return 'units/%d/';
+		return 'units/%d';
 	}
 }

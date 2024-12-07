@@ -16,6 +16,7 @@ use Hitmeister\Component\Api\Helper\Response;
 use Hitmeister\Component\Api\Namespaces\Traits\PerformWithId;
 use Hitmeister\Component\Api\Transfers\UnitAddTransfer;
 use Hitmeister\Component\Api\Transfers\UnitSellerTransfer;
+use Hitmeister\Component\Api\Transfers\UnitTransfer;
 use Hitmeister\Component\Api\Transfers\UnitUpdateTransfer;
 use Hitmeister\Component\Api\Transfers\UnitWithEmbeddedTransfer;
 
@@ -93,13 +94,14 @@ class UnitsNamespace extends AbstractNamespace
 	public function buildFind()
 	{
 		$endpoint = new Find($this->getTransport());
+		$endpoint->setParams(['storefront' => $this->storefront]);
 		return new FindBuilder($endpoint, '\Hitmeister\Component\Api\Transfers\UnitSellerTransfer');
 	}
 
 	/**
 	 * @param int   $id
 	 * @param array $embedded
-	 * @return UnitWithEmbeddedTransfer|null
+	 * @return UnitTransfer|null
 	 */
 	public function get($id, array $embedded = [])
 	{
@@ -107,18 +109,18 @@ class UnitsNamespace extends AbstractNamespace
 
 		// Ask for embedded fields
 		if (!empty($embedded)) {
-			$endpoint->setParams([
-				'embedded' => $embedded,
-			]);
+			$params = ['embedded' => $embedded];
 		}
+		$endpoint->setParams(['storefront' => $this->storefront] + ($params ?? []));
 
 		$result = $this->performWithId($endpoint, $id);
-		return $result ? UnitWithEmbeddedTransfer::make($result) : null;
+
+		return $result ? UnitTransfer::make($result['data']) : null;
 	}
 
 	/**
 	 * @param array|UnitAddTransfer $data
-	 * @return int
+	 * @return ?UnitTransfer
 	 *
 	 * @throws InvalidArgumentException
 	 * @throws ServerException
@@ -133,17 +135,22 @@ class UnitsNamespace extends AbstractNamespace
 		}
 
 		$endpoint = new Post($this->getTransport());
+		$endpoint->setParams(['storefront' => $this->storefront]);
 		$endpoint->setTransfer($data);
 
-		$resultRequest = $endpoint->performRequest();
+		try {
+			$result = $endpoint->performRequest();
+		} catch (ResourceNotFoundException $e) {
+			return null;
+		}
 
-		return Response::extractId($resultRequest, '/units/%d/');
+		return UnitTransfer::make($result['json']['data']);
 	}
 
 	/**
 	 * @param int                      $id
 	 * @param array|UnitUpdateTransfer $data
-	 * @return bool
+	 * @return ?UnitTransfer
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -157,16 +164,17 @@ class UnitsNamespace extends AbstractNamespace
 		}
 
 		$endpoint = new Update($this->getTransport());
+		$endpoint->setParams(['storefront' => $this->storefront]);
 		$endpoint->setId($id);
 		$endpoint->setTransfer($data);
 
 		try {
 			$result = $endpoint->performRequest();
 		} catch (ResourceNotFoundException $e) {
-			return false;
+			return null;
 		}
 
-		return $result['status'] == 204;
+		return UnitTransfer::make($result['json']['data']);
 	}
 
 	/**
@@ -176,6 +184,7 @@ class UnitsNamespace extends AbstractNamespace
 	public function delete($id)
 	{
 		$endpoint = new Delete($this->getTransport());
+		$endpoint->setParams(['storefront' => $this->storefront]);
 		$endpoint->setId($id);
 
 		try {

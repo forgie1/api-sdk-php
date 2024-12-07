@@ -7,23 +7,28 @@ namespace Hitmeister\Component\Api\Transfers;
  *
  * @codeCoverageIgnore
  *
+ * @property int $status
+ * @property string $currency
  * @property int $id_unit
- * @property int $id_item
- * @property string $condition
- * @property string $location
- * @property string $warehouse
- * @property int $amount
- * @property int $price
- * @property string $delivery_time
- * @property int $delivery_time_min
- * @property int $delivery_time_max
- * @property string $shipping_group
  * @property string $note
- * @property int $reference_price
- * @property SellerTransfer $seller
+ * @property string $condition
+ * @property int $listing_price
+ * @property int $minimum_price
+ * @property int $price
+ * @property string $id_offer
+ * @property int $id_product
+ * @property int $id_shipping_group
+ * @property int $id_warehouse
+ * @property int $amount
+ * @property string $date_inserted_iso
+ * @property string $date_lastchange_iso
+ * @property int $handling_time
  * @property int $shipping_rate
- * @property string $date_inserted
- * @property string $date_lastchange
+ * @property string $storefront
+ * @property int $transport_time_min
+ * @property int $transport_time_max
+ * @property string $fulfillment_type
+ * @property string $vat_indicator
  *
  *
  */
@@ -35,88 +40,112 @@ class UnitTransfer extends AbstractTransfer
     public function getProperties()
     {
         static $properties = array (
-  'id_unit' => 
+  'status' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'id_item' => 
+  'currency' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'condition' => 
+  'id_unit' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'location' => 
+  'note' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'warehouse' => 
+  'condition' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'amount' => 
+  'listing_price' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'price' => 
+  'minimum_price' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'delivery_time' => 
+  'price' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'delivery_time_min' => 
+  'id_offer' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'delivery_time_max' => 
+  'id_product' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'shipping_group' => 
+  'id_shipping_group' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'note' => 
+  'id_warehouse' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'reference_price' => 
+  'amount' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'seller' => 
-  array (
-    'embedded' => false,
-    'is_multiple' => false,
-    'type' => 'Hitmeister\\Component\\Api\\Transfers\\SellerTransfer',
-  ),
-  'shipping_rate' => 
+  'date_inserted_iso' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'date_inserted' => 
+  'date_lastchange_iso' =>
   array (
     'embedded' => false,
     'is_multiple' => false,
   ),
-  'date_lastchange' => 
+  'handling_time' =>
+  array (
+    'embedded' => false,
+    'is_multiple' => false,
+  ),
+  'shipping_rate' =>
+  array (
+    'embedded' => false,
+    'is_multiple' => false,
+  ),
+  'storefront' =>
+  array (
+    'embedded' => false,
+    'is_multiple' => false,
+  ),
+  'transport_time_min' =>
+  array (
+    'embedded' => false,
+    'is_multiple' => false,
+  ),
+  'transport_time_max' =>
+  array (
+    'embedded' => false,
+    'is_multiple' => false,
+  ),
+  'fulfillment_type' =>
+  array (
+    'embedded' => false,
+    'is_multiple' => false,
+  ),
+  'vat_indicator' =>
   array (
     'embedded' => false,
     'is_multiple' => false,

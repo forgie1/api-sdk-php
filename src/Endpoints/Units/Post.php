@@ -4,7 +4,6 @@ namespace Hitmeister\Component\Api\Endpoints\Units;
 
 use Hitmeister\Component\Api\Endpoints\AbstractEndpoint;
 use Hitmeister\Component\Api\Endpoints\Traits\BodyTransfer;
-use Hitmeister\Component\Api\Endpoints\Traits\EmptyParamWhiteList;
 use Hitmeister\Component\Api\Endpoints\Traits\RequestPost;
 use Hitmeister\Component\Api\Transfers\UnitAddTransfer;
 
@@ -20,8 +19,12 @@ use Hitmeister\Component\Api\Transfers\UnitAddTransfer;
 class Post extends AbstractEndpoint
 {
 	use RequestPost;
-	use EmptyParamWhiteList;
 	use BodyTransfer;
+
+	public function getParamWhiteList()
+	{
+		return ['storefront'];
+	}
 
 	/**
 	 * @param UnitAddTransfer $transfer
@@ -36,6 +39,6 @@ class Post extends AbstractEndpoint
 	 */
 	public function getURI()
 	{
-		return 'units/';
+		return 'units';
 	}
 }

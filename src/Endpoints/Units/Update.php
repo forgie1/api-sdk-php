@@ -5,7 +5,6 @@ namespace Hitmeister\Component\Api\Endpoints\Units;
 use Hitmeister\Component\Api\Endpoints\AbstractEndpoint;
 use Hitmeister\Component\Api\Endpoints\Interfaces\IdAware;
 use Hitmeister\Component\Api\Endpoints\Traits\BodyTransfer;
-use Hitmeister\Component\Api\Endpoints\Traits\EmptyParamWhiteList;
 use Hitmeister\Component\Api\Endpoints\Traits\RequestPatch;
 use Hitmeister\Component\Api\Endpoints\Traits\UriPatternId;
 use Hitmeister\Component\Api\Transfers\UnitUpdateTransfer;
@@ -23,8 +22,12 @@ class Update extends AbstractEndpoint implements IdAware
 {
 	use RequestPatch;
 	use UriPatternId;
-	use EmptyParamWhiteList;
 	use BodyTransfer;
+
+	public function getParamWhiteList()
+	{
+		return ['storefront'];
+	}
 
 	/**
 	 * @param UnitUpdateTransfer $transfer
@@ -39,6 +42,6 @@ class Update extends AbstractEndpoint implements IdAware
 	 */
 	protected function getUriPattern()
 	{
-		return 'units/%d/';
+		return 'units/%d';
 	}
 }

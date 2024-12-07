@@ -23,7 +23,7 @@ class Find extends AbstractEndpoint
 	 */
 	public function getParamWhiteList()
 	{
-		return ['id_offer', 'id_item', 'ean', 'embedded', 'limit', 'offset'];
+		return ['storefront', 'id_offer', 'id_item', 'ean', 'embedded', 'limit', 'offset'];
 	}
 
 	/**
@@ -31,6 +31,6 @@ class Find extends AbstractEndpoint
 	 */
 	public function getURI()
 	{
-		return 'units/seller/';
+		return 'units';
 	}
 }

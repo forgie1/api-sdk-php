@@ -21,13 +21,17 @@ class Get extends AbstractEndpoint implements IdAware
 {
 	use RequestGet;
 	use UriPatternId;
-	use EmbeddedParamWhiteList;
+
+	public function getParamWhiteList()
+	{
+		return ['storefront'];
+	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	protected function getUriPattern()
 	{
-		return 'units/%d/';
+		return 'units/%d';
 	}
 }
