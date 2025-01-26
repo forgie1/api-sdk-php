@@ -32,7 +32,7 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ezimuel/ringphp": "^1.2.2",
-        "psr/log": "^1.0"
+        "psr/log": "^2.0 || ^3.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
