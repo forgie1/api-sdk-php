@@ -116,7 +116,7 @@ class Client
 	 * @param Transport $transport
 	 * @param ?string $storefront
 	 */
-	public function __construct(Transport $transport, string $storefront = null)
+	public function __construct(Transport $transport, ?string $storefront = null)
 	{
 		$this->transport = $transport;
 

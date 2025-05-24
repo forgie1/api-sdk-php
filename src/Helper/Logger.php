@@ -25,7 +25,7 @@ class Logger
 	 * @param string          $level
 	 * @codeCoverageIgnore
 	 */
-	public static function logState(LoggerInterface $logger, array $request, array $response, \Exception $exception = null, $level = LogLevel::INFO)
+	public static function logState(LoggerInterface $logger, array $request, array $response, ?\Exception $exception = null, $level = LogLevel::INFO)
 	{
 		if (isset($request['body'])) {
 			static::log($logger, 'Request body', (array)$request['body'], LogLevel::DEBUG);

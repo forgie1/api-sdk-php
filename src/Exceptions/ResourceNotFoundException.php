@@ -13,7 +13,7 @@ namespace Hitmeister\Component\Api\Exceptions;
  */
 class ResourceNotFoundException extends BadRequestException
 {
-	public function __construct($message = 'Resource not found', \Exception $previous = null)
+	public function __construct($message = 'Resource not found', ?\Exception $previous = null)
 	{
 		parent::__construct($message, 404, $previous);
 	}

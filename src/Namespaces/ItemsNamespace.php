@@ -41,10 +41,10 @@ class ItemsNamespace extends AbstractNamespace
 
 	/**
 	 * @param string $ean
-	 * @param array  $embedded
+	 * @param ?array  $embedded
 	 * @return ItemWithEmbeddedTransfer|null
 	 */
-	public function findByEan($ean, array $embedded = null, string $storefront = 'de')
+	public function findByEan($ean, ?array $embedded = null, string $storefront = 'de')
 	{
 		$endpoint = new Find($this->getTransport());
 

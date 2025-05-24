@@ -41,7 +41,7 @@ class AttributesNamespace extends AbstractNamespace
 	 * @param ?string $locale
 	 * @return Cursor|AttributeTransfer[]
 	 */
-	public function find($q = null, $limit = null, $offset = null, string $locale = null)
+	public function find($q = null, $limit = null, $offset = null, ?string $locale = null)
 	{
 		return $this->buildFind()
 			->addParam('q', $q)
