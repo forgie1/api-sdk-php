@@ -34,18 +34,19 @@ class UnitsNamespace extends AbstractNamespace
 	use PerformWithId;
 
 	/**
-	 * @param int        $idItem
+	 * @param int        $idProduct KMP internal id_product
 	 * @param int|string $idOffer
 	 * @param string[]   $embedded
 	 * @param int        $limit
 	 * @param int        $offset
 	 * @return Cursor|UnitSellerTransfer[]
 	 */
-	public function findByIdItem($idItem, $idOffer = null, $embedded = null, $limit = 30, $offset = 0)
+	public function findByIdProduct($idProduct, $idOffer = null, $embedded = null, $limit = 30, $offset = 0)
 	{
 		return $this->buildFind()
+			->addParam('storefront', $this->storefront)
+			->addParam('id_product', $idProduct)
 			->addParam('id_offer', $idOffer)
-			->addParam('id_item', $idItem)
 			->addParam('embedded', $embedded)
 			->setLimit($limit)
 			->setOffset($offset)
@@ -63,16 +64,17 @@ class UnitsNamespace extends AbstractNamespace
 	public function findByEan($ean, $idOffer = null, $embedded = null, $limit = 30, $offset = 0)
 	{
 		return $this->buildFind()
-			->addParam('id_offer', $idOffer)
+			->addParam('storefront', $this->storefront)
 			->addParam('ean', $ean)
+			->addParam('id_offer', $idOffer)
 			->addParam('embedded', $embedded)
 			->setLimit($limit)
 			->setOffset($offset)
 			->find();
-    }
-    
+	}
+
 	/**
-	 * @param int|string $idOffer
+	 * @param int|string $idOffer Provided ID of your stock
 	 * @param string[]   $embedded
 	 * @param int        $limit
 	 * @param int        $offset
@@ -81,12 +83,13 @@ class UnitsNamespace extends AbstractNamespace
 	public function findByIdOffer($idOffer, $embedded = null, $limit = 30, $offset = 0)
 	{
 		return $this->buildFind()
+			->addParam('storefront', $this->storefront)
 			->addParam('id_offer', $idOffer)
 			->addParam('embedded', $embedded)
 			->setLimit($limit)
 			->setOffset($offset)
 			->find();
-	}    
+	}
 
 	/**
 	 * @return FindBuilder
@@ -94,7 +97,6 @@ class UnitsNamespace extends AbstractNamespace
 	public function buildFind()
 	{
 		$endpoint = new Find($this->getTransport());
-		$endpoint->setParams(['storefront' => $this->storefront]);
 		return new FindBuilder($endpoint, '\Hitmeister\Component\Api\Transfers\UnitSellerTransfer');
 	}
 

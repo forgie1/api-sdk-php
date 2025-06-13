@@ -192,6 +192,8 @@ class Cursor implements \Iterator
 	 */
 	private function getCurrent()
 	{
+		$this->valid();
+
 		// Check transfer first
 		if (isset($this->transferData[$this->position])) {
 			return $this->transferData[$this->position];
